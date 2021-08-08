@@ -10,7 +10,9 @@ import com.example.mencobaretrofit3.R;
 import com.example.mencobaretrofit3.model.Comments;
 import com.example.mencobaretrofit3.model.Post;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,7 +44,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getPosts() {
-        Call<List<Post>> call = jsonPlaceHolderAPI.getPost(4,"id","desc");
+        Map<String,String>parameters = new HashMap<>();
+        parameters.put("userId","1");
+        parameters.put("_sort","id");
+        parameters.put("_order","asc");
+
+        Call<List<Post>> call = jsonPlaceHolderAPI.getPost(parameters);
         call.enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
